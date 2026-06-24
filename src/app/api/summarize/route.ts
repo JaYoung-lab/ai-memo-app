@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { GoogleGenAI } from '@google/genai'
 
 export const runtime = 'nodejs'
+export const maxDuration = 30
 
 const SYSTEM_INSTRUCTION = `당신은 메모 요약 전문가입니다. 사용자의 메모를 읽고 핵심 내용을 간결하게 한국어로 요약해 주세요.
 
@@ -58,6 +59,7 @@ export async function POST(request: NextRequest) {
         systemInstruction: SYSTEM_INSTRUCTION,
         temperature: 0.3,
         maxOutputTokens: 512,
+        thinkingConfig: { thinkingBudget: 0 },
       },
     })
 
